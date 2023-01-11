@@ -1,0 +1,24 @@
+{
+  "name": "chili_lite",
+  "version": "1.0.0",
+  "description": "Typing Master Clone",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon src/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Harshitgoel-19/Webster-Chili_lite.git"
+  },
+  "author": "Harshit Goel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Harshitgoel-19/Webster-Chili_lite/issues"
+  },
+  "homepage": "https://github.com/Harshitgoel-19/Webster-Chili_lite#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "nodemon": "^2.0.20"
+  }
+}
