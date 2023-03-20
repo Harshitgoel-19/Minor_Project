@@ -1,0 +1,36 @@
+#leaderboard{
+    width: 30vw;
+    border: 2px solid chartreuse;
+    height: 40vh;
+    margin: 20px;
+    overflow-y: scroll;
+}
+.userleader{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+#currentUser{
+    background-color: chartreuse;
+    color: black;
+    font-weight: bolder;
+    font-size: larger;
+}
+
+.usercontent{
+    display: inline-block;
+    width: 25%;
+}
+.username{
+    width: 50%;
+}
+
+.leaderhead{
+    /* display: block; */
+    background-color: chartreuse;
+    position:sticky;
+    z-index: 2;
+    top:0;
+    /* margin-bottom: 5px; */
+}

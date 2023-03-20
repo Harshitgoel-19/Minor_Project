@@ -1,0 +1,9 @@
+<form action="/register" method="POST">
+    <% if(mesg){%>
+    <div><%= mesg%></div>
+    <%}%>
+    <div>Enter Name: <input type="text" name="username" id="" placeholder="name"></div>
+    <div>Enter Email: <input type="email" name="email" id="" placeholder="email"></div>
+    <div>Enter Password: <input type="password" name="password" id="" placeholder="password"></div>
+    <div><input type="submit" value="submit"></div>
+</form>
