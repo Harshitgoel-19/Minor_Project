@@ -7,6 +7,7 @@
     width: 100vw;
     height: 10vh;
     background-color: chartreuse;
+    display: flex;
 }
 #level{
     width: 70.7vw;
@@ -52,6 +53,7 @@
     font-size: 1.5em;
     text-align: center;
     height: 30vh;
+    scroll-behavior: calc();
 }
 #keyboard{
     background-color:rgba(55, 0, 255, 0.226);
@@ -63,4 +65,47 @@
 }
 #keyboard button{
     margin: 3px 2px;
+}
+#modelO{
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    display: flex;
+    backdrop-filter: blur(10px);
+    z-index: 2;
+    display: none;
+    animation: fadeInAnimation ease 2s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+@keyframes fadeInAnimation {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+     }
+}
+#model{
+    width: 60vw;
+    height: 50vh;
+    margin: auto;
+    background-color: aqua;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+#modell{
+    position: relative;
+    left: 3vw;
+    top: 10vh;
+}
+#modelr{
+    position: relative;
+    left: 47vw;
+    top: 5.5vh;
+}
+.modelI{
+    font-size: xx-large;
 }
