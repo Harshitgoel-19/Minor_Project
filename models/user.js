@@ -25,8 +25,17 @@ const userSchema=mongoose.Schema({
     },
     image:{
         type: String,
-        
-    }
+        default: "../public/images/defaultUserIcon.png"
+    },
+    pastScores: [{score: Number, date: Date, level: Number}],
+    otpData:{
+        otp:{
+            type: Number,
+        },
+        otpExpire:{
+            type: Date,
+        },
+    },
 })
 
 mongoose.set("strictQuery",false);

@@ -16,7 +16,7 @@
             <div id="error1" class="modelI">Total Errors:</div>
             <div id="accuracy1" class="modelI">Accuracy:</div>
             <div id="score" class="modelI">Score:</div>
-            <form action="/levelup" method="POST">
+            <form action="level/levelup" method="POST">
             <span><button type="submit" class="btn btn-outline-secondary col-2" id="modell" name="step" value="retry">Retry</button></span>
             <span><button type="submit" class="btn btn-outline-secondary col-2" id="modelr" name="step" value="next">Next</button></span>
             </form>
@@ -24,16 +24,16 @@
     </div>
     <div>
     <div id="nav">
-        <form action="/logout" method="POST">
+        <form action="/auth/logout" method="POST">
             <button type="submit" class="logout btn btn-outline-secondary flex-fill">LogOut</button>
         </form>
-        <form action="/user" method="GET">
+        <form action="/dashboard/user" method="GET">
             <button type="submit" class="logout btn btn-outline-secondary flex-fill">User</button>
         </form>
     </div>
     <div>
         <div id="level">
-            <div id="levelname">
+            <div id="levelname" data-level="<%= problem.level %>">
                 <h1>Level <%= problem.level %></h1>
             </div>
             <div id="judge">

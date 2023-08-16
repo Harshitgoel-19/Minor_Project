@@ -11,13 +11,14 @@
 </head>
 <body>
     <div id="nav">
-        <form action="/logout" method="POST">
+        <form action="/auth/logout" method="POST">
             <button type="submit" class="logout btn btn-outline-secondary flex-fill">LogOut</button>
         </form>
         <form action="/" method="GET">
             <button type="submit" class="logout btn btn-outline-secondary flex-fill">Home</button>
         </form>
     </div>
+    
     <div id="info">
         <h1>Welcome <%= user.username%></h1>
     </div>
@@ -43,7 +44,7 @@
                     <%= luser.username%>
                 </div>
                 <div class="usercontent">
-                    <%= luser.score%>
+                    <%= luser.score.toPrecision(3)%>
                 </div>
             </div>
             <%} else{%>
@@ -55,7 +56,7 @@
                     <%= luser.username%>
                 </div>
                 <div class="usercontent">
-                    <%= luser.score%>
+                    <%= luser.score.toPrecision(3)%>
                 </div>
             </div>
         <%}})%>

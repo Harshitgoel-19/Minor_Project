@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Profile</title>
+    <link rel="stylesheet" href="../public/css/userstyle.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+</head>
+<body>
+    <div id="profile">
+        <form action="/dashboard/update-avatar" method="post" enctype="multipart/form-data">
+            <div id="displayAvatar">
+                <img src=<%= user.image%> alt="">
+            </div>
+            <div id="changeAvatar">
+                <input type="file" name="avatar" class="changeAvatarComponent"/>
+                <div id="btn">
+                    <button type="submit" class="changeAvatarComponent ">Upload</button>
+                </div>
+            </div>
+            <div id="mesg">
+                <%= error%>
+            </div>
+        </form>
+        <form action="/dashboard/remove-avatar" method="post">
+            <button class="changeAvatarComponent" type="submit">Remove</button>
+        </form>
+    </div>
+    
+    <form action="/dashboard/update-profile">
+        <div class="form-group">
+          <label for="exampleInputEmail">Email address</label>
+          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="username" placeholder="Enter email">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+    <form action="/dashboard/update-password" method="get">
+        <button class="" type="submit">Update Password</button>
+    </form>
+</body>
+</html>

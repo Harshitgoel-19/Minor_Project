@@ -30,15 +30,17 @@ async function check(keynum){
         error1.innerText+=" "+wrong
         accuracy1.innerText+=" "+accuracyp
         // console.log(Number.parseFloat(speed.innerText))
+        let level=document.getElementById("levelname").dataset.level
         let score=(Number.parseFloat(speed.innerText)*accuracyp)/100;
         scored.innerText+=" "+score
-        const result=await fetch('/api/levelupdate',{
+        const result=await fetch('level/api/levelupdate',{
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                score
+                score,
+                level
             })
         }).then((res)=>res.json())
         if(result.status!=='ok'){

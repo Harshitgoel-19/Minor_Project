@@ -34,3 +34,52 @@
     top:0;
     /* margin-bottom: 5px; */
 }
+
+#profile{
+    width: 20vw;
+    height: 22vw;
+    margin: auto;
+    /* border: 2px solid black; */
+}
+#displayAvatar{
+    border: 2px solid black;
+    width: 15vw;
+    height: 15vw;
+    border-radius: 50%;
+    margin: auto;
+    margin-top: 10px;
+    background-color: rgba(151, 151, 151, 0.406);
+    display: flex;
+    /* padding: 1.5vw; */
+    overflow: hidden;
+}
+#displayAvatar img{
+    align-items: center;
+    justify-content: center;
+    /* position: inherit; */
+    height: 100%;
+    width: 100%;
+    object-fit:cover;
+    /* z-index: 2; */
+}
+#changeAvatar{
+    width: 15vw;
+    margin: auto;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+}
+#changeAvatar #btn{
+    display: flex;
+    flex-direction: row;
+    justify-content:center;
+}
+.changeAvatarComponent{
+    margin: 4px;
+}
+#mesg{
+    width: 15vw;
+    margin: auto;
+    text-align: center;
+    color: red;
+}

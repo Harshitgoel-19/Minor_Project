@@ -6,8 +6,12 @@ const app=express();
 const session=require('express-session');
 const MongoDBSession=require('connect-mongodb-session')(session);
 const bodyParser=require('body-parser');
-const bcrypt=require('bcrypt');
-const userModel=require('./models/user')
+
+
+const authRouter=require('./routes/authRoutes');
+const levelRouter=require('./routes/levelRoutes');
+const userRouter=require('./routes/userRoutes');
+const authController = require('./controllers/authController');
 
 mongoose.connect('mongodb://localhost:27017/typing-speed',{
     useNewUrlParser: true,
@@ -19,8 +23,10 @@ connection.once('open',()=>{
 }).on('error',err=>{
     console.log("Connection Failed");
 });
+// app.use()
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json());
+
 const store=new MongoDBSession({
     uri: 'mongodb://localhost:27017/typing-speed',
     collection: 'sessions',
@@ -33,105 +39,19 @@ app.use(
         store: store,
     })
 )
-const isAuth=(req,res,next)=>{
-    if(req.session.isAuth){
-        next()
-    }else{
-        res.redirect('/login');
-    }
-}
+
+app.use('/auth',authRouter);
+app.use('/level',levelRouter);
+app.use('/dashboard',userRouter);
 const question=require("./models/question")
 app.use('/public',express.static(__dirname+'/public'))
 app.set('views',(path.join(__dirname,'views')))
 app.set('view engine','ejs')
-app.get('/',isAuth,async(req,res)=>{
+
+
+app.get('/',authController.isAuthorised,async(req,res)=>{
     let problem=await question.findOne({level:req.session.user.level});
     res.render('index',{problem: problem})
-})
-app.get('/register',(req,res)=>{
-    res.render('register',{mesg : ""});
-})
-app.get('/login',(req,res)=>{
-    res.render('login',{mesg : ""});
-})
-app.get('/user',isAuth,async (req,res)=>{
-    let alluser=userModel.find();
-    // console.log(alluser);
-    alluser=alluser.sort({"score":-1,"level":-1});
-    let userarray=await alluser;
-    let index;
-    // console.log(userarray)
-    userarray.find((user,i)=>{
-        if(user.email===req.session.user.email){
-            index = i;
-            return true;
-        }
-        return false;
-    })
-    // console.log(index);
-    userarray=userarray.map((user)=>{
-        const a={
-            username: user.username,
-            score: user.score,
-        }
-        return a;
-    })
-    // console.log(userarray);
-    res.render('user',{user: req.session.user, userarray:userarray, currentUserIndex:index});
-})
-
-app.post('/register',async (req,res)=>{
-    const {username,email,password}=req.body
-    let user=await userModel.findOne({email});
-    if(user){
-        const mesg = "Email already exists"
-        return res.render('register',{mesg : mesg});
-    }
-    const hashedpassword=await bcrypt.hash(password,10);
-    user = await userModel.create({
-        username,
-        email,
-        password : hashedpassword
-    });
-    return res.redirect('/login');
-})
-
-app.post('/login',async(req,res)=>{
-    const {email,password}=req.body;
-    let user=await userModel.findOne({email});
-    if(!user){
-        const mesg = "Invalid Email/Password"
-        return res.render('login',{mesg : mesg});
-    }
-    const isMatch=await bcrypt.compare(password,user.password);
-    if(!isMatch){
-        const mesg = "Invalid Email/Password"
-        return res.render('login',{mesg:mesg});
-    }
-    req.session.isAuth=true;
-    req.session.user=user;
-    return res.redirect('/');
-})
-app.post('/logout',(req,res)=>{
-    req.session.destroy((err)=>{
-        if(err) throw err;
-        res.redirect('/login')
-    })
-})
-app.post('/api/levelupdate',async(req,res)=>{
-    let {score}=req.body
-    console.log(score)
-    req.session.user.score+=score
-    req.session.save()
-    console.log(req.session.user.score)
-    await userModel.updateOne({email: req.session.user.email},{level: req.session.user.level+1 , score: req.session.user.score})
-})
-app.post('/levelup',(req,res)=>{
-    if(req.body.step=='next'){
-        req.session.user.level++;
-        req.session.save()
-    }
-    return res.redirect('/');
 })
 
 const port=process.env.PORT || 3000;
